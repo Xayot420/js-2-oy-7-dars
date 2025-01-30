@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .child:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .child:hover:enabled {
+            background-color: rgb(255, 109, 31);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="nav">
+                <img src="./logo.png" alt="Mars IT School" id="mars-logo" style="cursor:pointer;">
+                <div class="right">
+                    <img src="./globus.png" alt="">
+                    <select id="language-select">
+                        <option value="uz">O'zb</option>
+                        <option value="ru">Рус</option>
+                        <option value="en">Eng</option>
+                    </select>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="yacheyka">
+                <div class="header">
+                    <nav class="nav2">
+                        <img class="img" src="./logo.png" alt="Mars IT School">
+                        <a class="a" href="#">Offerta imzolash <img src="./Vector (4).png" alt=""></a>
+                    </nav>
+                </div>
+                <h1 data-lang="welcome">Spacega xush kelibsiz</h1>
+
+                <div class="pbtn">
+                    <button class="btn" data-lang="student">Oquvchiman</button>
+                    <button class="btn2" id="parent-btn" data-lang="parent">Ota-onaman</button>
+                </div>
+
+                <form id="form">
+                    <label>
+                        <input class="input" id="login" type="text" required placeholder="Modme Id or Phone number">
+                    </label>
+                    <div class="wrapper input">
+                        <label>
+                            <input type="password" id="parol" required placeholder="Password">
+                        </label>
+                        <button id="eye" type="button" class="koz">
+                            <img src="./Eye.png" alt="Show/Hide Password">
+                        </button>
+                    </div>
+                    <div class="pbutton">
+                        <button type="submit" class="child" disabled data-lang="confirm">Подтвердить</button>
+                    </div>
+                </form>
+
+                <li class="aboba"><a class="abob" href="#" data-lang="qr">QR code orqali kirish</a></li>
+            </div>
+        </section>
+
+        <div id="wrapper"></div>
+    </main>
+
+    <script>
+        const marsForm = document.querySelector("#form");
+        const marsLogin = document.querySelector("#login");
+        const marsPassword = document.querySelector("#parol");
+        const marsKoz = document.querySelector("#eye img");
+        const confirmButton = document.querySelector(".child");
+        const languageSelect = document.querySelector("#language-select");
+        const marsLogo = document.querySelector("#mars-logo");
+        const parentButton = document.querySelector("#parent-btn");
+
+        const translations = {
+            uz: {
+                welcome: "Spacega xush kelibsiz",
+                student: "Oquvchiman",
+                parent: "Ota-onaman",
+                confirm: "Подтвердить",
+                qr: "QR code orqali kirish"
+            },
+            ru: {
+                welcome: "Добро пожаловать в Space",
+                student: "Я ученик",
+                parent: "Я родитель",
+                confirm: "Подтвердить",
+                qr: "Войти через QR-код"
+            },
+            en: {
+                welcome: "Welcome to Space",
+                student: "I am a student",
+                parent: "I am a parent",
+                confirm: "Confirm",
+                qr: "Login via QR code"
+            }
+        };
+
+        // Translate page based on language selection
+        function translatePage(lang) {
+            document.querySelectorAll("[data-lang]").forEach(element => {
+                const key = element.getAttribute("data-lang");
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        languageSelect.addEventListener("change", (e) => {
+            translatePage(e.target.value);
+        });
+
+        // Enable or disable the confirm button based on input
+        const toggleButtonState = () => {
+            confirmButton.disabled = !(marsLogin.value.trim() && marsPassword.value.trim());
+        };
+
+        marsLogin.addEventListener("input", toggleButtonState);
+        marsPassword.addEventListener("input", toggleButtonState);
+
+        // Show/Hide password feature
+        marsKoz.addEventListener("click", () => {
+            const type = marsPassword.type === "password" ? "text" : "password";
+            marsPassword.type = type;
+            marsKoz.src = type === "password" ? "./Eye.png" : "./EyeClosed.png";
+        });
+
+        marsForm.addEventListener("submit", (evt) => {
+            evt.preventDefault();
+            const login = Number(marsLogin.value.trim());
+            const password = Number(marsPassword.value.trim());
+            const foundUser = oquvchilar.find(user => user.login === login && user.parol === password);
+
+            if (foundUser) {
+                alert(`Xush kelibsiz!
+Ism: ${foundUser.ism}
+Coin: ${foundUser.coin}
+Ustoz: ${foundUser.ustoz}
+Group: ${foundUser.group}
+Vaqti: ${foundUser.vaqti}`);
+            } else {
+                alert("Login yoki parol noto'g'ri!");
+            }
+        });
+
+        // Redirect Mars IT School logo click to its website
+        marsLogo.addEventListener("click", () => {
+            window.open("https://mars-it-school.com", "_blank");
+        });
+
+        parentButton.addEventListener("click", () => {
+            // Yangi formani yaratish
+            const loginForm = document.createElement('div');
+            loginForm.innerHTML = `
+                <label for="parent-login">Login:</label>
+                <input type="text" id="parent-login" placeholder="Loginni kiriting" required>
+                <label for="parent-password">Parol:</label>
+                <input type="password" id="parent-password" placeholder="Parolni kiriting" required>
+                <button id="parent-submit">Kirish</button>
+            `;
+            document.querySelector("main").appendChild(loginForm);
+
+            // Submit tugmasi bosilganda login va parolni tekshirish
+            document.querySelector("#parent-submit").addEventListener("click", () => {
+                const parentLogin = Number(document.querySelector("#parent-login").value.trim());
+                const parentPassword = Number(document.querySelector("#parent-password").value.trim());
+                const foundParent = otaOnalar.find(parent => parent.login === parentLogin && parent.parol === parentPassword);
+
+                if (foundParent) {
+                    let childrenInfo = foundParent.farzandlar.map(child => `Farzand: ${child.ism}, Ustoz: ${child.ustoz}, Guruh: ${child.group}, Vaqti: ${child.vaqti}`).join("\n");
+                    alert(`Ota-ona: ${foundParent.ism}\n${childrenInfo}`);
+                } else {
+                    alert("Login yoki parol noto'g'ri!");
+                }
+
+                // Formani o'chirish
+                loginForm.remove();
+            });
+        });
+
+        const oquvchilar = [
+            { login: 9821, parol: 1234, ism: "Ibrohim", coin: 987, ustoz: "Sunatbek Krasavchik", group: 1943, vaqti: 15.10 },
+            { login: 6787, parol: 2365, ism: "Murod", coin: 203, ustoz: "Bot", group: "yoq", vaqti: 15.10 },
+            { login: 2456, parol: 8653, ism: "Doni", coin: 1756, ustoz: "Sunatbek Krasavchik", group: 1943, vaqti: 15.10 },
+            { login: 1098, parol: 1789, ism: "Said", coin: 987, ustoz: "Aisha", group: 1935, vaqti: 14.00 }
+        ];
+
+        const otaOnalar = [
+            {
+                login: 4567,
+                parol: 9876,
+                ism: "Anvar",
+                farzandlar: [
+                    { ism: "Olim", ustoz: "Sunatbek Krasavchik", group: 1943, vaqti: "15:10" },
+                    { ism: "Sami", ustoz: "Aisha", group: 1935, vaqti: "14:00" }
+                ]
+            },
+            {
+                login: 1234,
+                parol: 5678,
+                ism: "Madina",
+                farzandlar: [
+                    { ism: "Jasur", ustoz: "Sunatbek Krasavchik", group: 1943, vaqti: "15:10" }
+                ]
+            },
+            {
+                login: 4321,
+                parol: 8765,
+                ism: "Kamol",
+                farzandlar: [
+                    { ism: "Malika", ustoz: "Bot", group: "yo'q", vaqti: "15:10" }
+                ]
+            }
+        ];
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #FAFAFA;
+}
+
+.container {
+    width: 1440px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: white;
+    border-bottom: 2px solid #DEDBDB;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 35px 100px;
+
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    font-size: 36px;
+    font-weight: bold;
+    gap: 10px;
+}
+
+
+.yacheyka {
+    border: 2px solid #DEDBDB;
+    border-radius: 30px;
+    background-color: white;
+    width: 600px;
+    margin: 80px auto;
+}
+
+.nav2 {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 56px 65px;
+}
+
+.img {
+    width: 150px;
+}
+
+.a {
+    align-items: center;
+    display: flex;
+    font-size: 24px;
+    color: #F0400F;
+    gap: 10px;
+}
+
+h1 {
+    color: #0E0D5D;
+    text-align: center;
+    font-size: 40px;
+    margin: 50px 0;
+}
+
+
+.pbtn {
+    background-color: #F5F5F5;
+    width: 470px;
+    padding: 8px 11px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+}
+
+.btn {
+    border: none;
+    padding: 10px 46px;
+    background-color: white;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+.btn:active {
+    background-color: white;
+    color: black;
+}
+
+.btn2 {
+    border: none;
+    padding: 10px 46px;
+    background-color: #F5F5F5;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+.btn2:active {
+    background-color: white;
+    color: black;
+}
+
+.input {
+    background-color: white;
+    width: 470px;
+    padding: 20px 11px;
+    border: 3px solid #FAFAFA;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 40px auto;
+    font-size: 20px;
+}
+
+.aboba {
+    justify-content: center;
+    display: flex;
+    font-size: 20px;
+
+}
+
+.abob {
+    color: #000000A3;
+}
+
+
+.pbutton {
+    display: flex;
+    justify-content: end;
+    margin: 30px;
+
+}
+
+.child {
+    padding: 17px 23px;
+    font-size: 20px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background-color: #ff7c35;
+}
+
+.child:hover {
+    background-color: rgb(255, 109, 31);
+}
+
+.child:active {
+    background-color: #ff5900;
+}
+
+input:focus {
+    outline: none;
+}
+.koz{
+    background-color: transparent;
+    border: none;
+}
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+input{
+    border: none;
+    font-size: 20px;
+}
